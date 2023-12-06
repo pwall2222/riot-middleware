@@ -8,13 +8,6 @@ use super::{check_xml, Handler, Reader, Writer, WriterArc, MODIFY};
 
 use crate::data::data_server;
 
-#[allow(dead_code)]
-fn print(buff: &[u8], color: &str) {
-    println!("\x1b[{}m{}\x1b[0m", color, unsafe {
-        String::from_utf8_unchecked(buff.into())
-    });
-}
-
 pub async fn handler(
     mut reader: Reader,
     writer: WriterArc,
@@ -49,13 +42,9 @@ async fn data_handler(
     let writer = writer.lock().await;
     if buff.len() == 0 && check_xml(data) {
         write(writer, data, handler_type).await;
-        print(data, "95");
         return;
     }
     buff.extend(data);
-    println!("Multi buff");
-    print(&buff, "94");
-
     if !check_xml(&buff) {
         return;
     }

@@ -3,8 +3,6 @@ mod handler;
 mod modify;
 mod server;
 mod types;
-#[allow(dead_code)]
-mod utils;
 mod xml;
 
 pub use data::*;
