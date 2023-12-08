@@ -2,7 +2,7 @@ use super::{get_attr, get_child, get_text, ElementError, ROSTER};
 use minidom::Element;
 use serde::Serialize;
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub struct Friend {
     pub status: String,
     pub puuid: String,

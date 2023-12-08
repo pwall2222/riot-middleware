@@ -18,7 +18,8 @@ fn handle_session(el: &Element) -> Result<(), ElementError> {
 
 fn handle_friend(el: &Element) -> Result<(), ElementError> {
     let friend = Friend::try_from(el)?;
-    FRIENDS.write().unwrap().push(friend);
+    let puuid = friend.puuid.to_string();
+    FRIENDS.write().unwrap().insert(puuid, friend);
     Ok(())
 }
 

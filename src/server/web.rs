@@ -1,5 +1,5 @@
 use crate::chat::MODIFY;
-use crate::data::{Presence, IN_XML_MESSAGES, OUT_XML_MESSAGES};
+use crate::data::{Friend, Presence, IN_XML_MESSAGES, OUT_XML_MESSAGES};
 use crate::WEB_PORT;
 
 use super::{FRIENDS, PRESENCES, SESSION};
@@ -7,7 +7,9 @@ use actix_web::{delete, get, put, web, App, HttpServer, Responder};
 
 #[get("/friends")]
 async fn friends() -> impl Responder {
-    web::Json(&FRIENDS)
+    let data: Vec<Friend> = FRIENDS.read().unwrap().values().cloned().collect();
+
+    web::Json(data)
 }
 
 #[get("/presences")]
