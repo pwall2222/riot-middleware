@@ -1398,6 +1398,7 @@ dependencies = [
 [[package]]
 name = "simple_proxy"
 version = "1.3.4"
+source = "git+https://github.com/FlowerAce/rs-simple-proxy.git#98958061bcddf8824dc2975ca92779d4b077de84"
 dependencies = [
  "async-trait",
  "chrono",

@@ -18,7 +18,7 @@ tokio = { version = "1.34.0", features = ["full"] }
 async-trait = "0.1.74"
 
 # HTTP
-simple_proxy = { path = "../rs-simple-proxy/", features = ["router"] }
+simple_proxy = { git = "https://github.com/FlowerAce/rs-simple-proxy.git", features = ["router"] }
 hyper = { version = "0.14.27", features = ["full"] }
 http = "0.2.1"
 actix-web = "4.4.0"
