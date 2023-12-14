@@ -22,6 +22,7 @@ simple_proxy = { git = "https://github.com/FlowerAce/rs-simple-proxy.git", featu
 hyper = { version = "0.14.27", features = ["full"] }
 http = "0.2.1"
 actix-web = "4.4.0"
+reqwest = "0.11.22"
 
 # TLS
 native-tls = "0.2"

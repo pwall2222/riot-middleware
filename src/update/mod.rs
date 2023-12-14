@@ -1,11 +1,20 @@
 use anyhow::Result;
-use rman::RiotManifest;
 
-pub fn testa() -> Result<()> {
-    let path = r"C:\ProgramData\Riot Games\Metadata\Riot Client\Riot Client.manifest";
+use serde::Deserialize;
 
-    let manifest = RiotManifest::from_path(path, None)?;
+#[derive(Deserialize)]
+struct ClientConfig {
+    #[serde(rename = "keystone.self_update.manifest_url")]
+    manifest_url: String,
+}
 
-    dbg!(manifest.data.files);
-    Ok(())
+pub async fn get_manifest_url() -> Result<String> {
+    let host = r"clientconfig.rpg.riotgames.com/api/v1/config/public";
+    let params = "version=99.0.0.9999999&patchline=KeystoneFoundationLiveWin&app=Riot%20Client&namespace=keystone.self_update";
+    let url = format!("https://{}?{}", host, params);
+    let res = reqwest::get(url).await?;
+    let body = res.bytes().await?;
+    let data: ClientConfig = serde_json::from_slice(&body)?;
+    let manifest_url = data.manifest_url;
+    Ok(manifest_url)
 }
